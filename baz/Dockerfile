@@ -2,9 +2,9 @@ FROM golang:1.10 AS builder
 
 MAINTAINER Mark St.Godard <markstgodard@gmail.com>
 
-WORKDIR /go/src/github.com/markstgodard/baz
+WORKDIR /go/src/github.com/markstgodard/linkerd2bug/baz
 
-COPY . /go/src/github.com/markstgodard/baz
+COPY . /go/src/github.com/markstgodard/linkerd2bug/baz
 
 RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -i -o /baz
 
