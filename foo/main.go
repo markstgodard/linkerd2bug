@@ -14,8 +14,7 @@ import (
 func main() {
 	r := mux.NewRouter()
 
-	// host := "http://bar:9000"
-	host := "http://127.0.0.1:9001"
+	host := "http://bar:9000"
 
 	proxyH := newProxy(host)
 	r.PathPrefix("/").Handler(proxyH)
