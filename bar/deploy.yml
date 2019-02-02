@@ -1,0 +1,115 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bar
+  labels:
+    app: bar
+spec:
+  ports:
+  - port: 9000
+    name: http
+  selector:
+    app: bar
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: bar
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        linkerd.io/created-by: linkerd/cli stable-2.1.0
+        linkerd.io/proxy-version: stable-2.1.0
+      creationTimestamp: null
+      labels:
+        app: bar
+        linkerd.io/control-plane-ns: linkerd
+        linkerd.io/proxy-deployment: bar
+    spec:
+      containers:
+      - env:
+        image: "markstgodard/linkerd2bug-bar:latest"
+        imagePullPolicy: Always
+        name: bar
+        ports:
+        - containerPort: 9000
+        # readinessProbe:
+        #   failureThreshold: 3
+        #   httpGet:
+        #     path: /healthz
+        #     port: 9000
+        #     scheme: HTTP
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 5
+        #   successThreshold: 1
+        #   timeoutSeconds: 1
+        resources: {}
+      - env:
+        - name: LINKERD2_PROXY_LOG
+          value: warn,linkerd2_proxy=info
+        - name: LINKERD2_PROXY_BIND_TIMEOUT
+          value: 10s
+        - name: LINKERD2_PROXY_CONTROL_URL
+          value: tcp://linkerd-proxy-api.linkerd.svc.cluster.local:8086
+        - name: LINKERD2_PROXY_CONTROL_LISTENER
+          value: tcp://0.0.0.0:4190
+        - name: LINKERD2_PROXY_METRICS_LISTENER
+          value: tcp://0.0.0.0:4191
+        - name: LINKERD2_PROXY_OUTBOUND_LISTENER
+          value: tcp://127.0.0.1:4140
+        - name: LINKERD2_PROXY_INBOUND_LISTENER
+          value: tcp://0.0.0.0:4143
+        - name: LINKERD2_PROXY_DESTINATION_PROFILE_SUFFIXES
+          value: .
+        - name: LINKERD2_PROXY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: gcr.io/linkerd-io/proxy:stable-2.1.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: 4191
+          initialDelaySeconds: 10
+        name: linkerd-proxy
+        ports:
+        - containerPort: 4143
+          name: linkerd-proxy
+        - containerPort: 4191
+          name: linkerd-metrics
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 4191
+          initialDelaySeconds: 10
+        resources: {}
+        securityContext:
+          runAsUser: 2102
+        terminationMessagePolicy: FallbackToLogsOnError
+      initContainers:
+      - args:
+        - --incoming-proxy-port
+        - "4143"
+        - --outgoing-proxy-port
+        - "4140"
+        - --proxy-uid
+        - "2102"
+        - --inbound-ports-to-ignore
+        - 4190,4191
+        image: gcr.io/linkerd-io/proxy-init:stable-2.1.0
+        imagePullPolicy: IfNotPresent
+        name: linkerd-init
+        resources: {}
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: false
+        terminationMessagePolicy: FallbackToLogsOnError
+status: {}
+---
