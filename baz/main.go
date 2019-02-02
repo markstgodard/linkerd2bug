@@ -12,6 +12,6 @@ func main() {
 	s := &hello.Service{}
 	rpcHandler := hello.NewBazServiceServer(s, nil)
 
-	fmt.Println("Listening...")
+	fmt.Println("[baz] Listening...")
 	log.Fatal(http.ListenAndServe(":9000", rpcHandler))
 }
