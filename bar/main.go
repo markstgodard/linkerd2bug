@@ -9,10 +9,10 @@ import (
 )
 
 func barHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("bar handler, calling baz:9002..!")
+	fmt.Println("bar handler, calling baz:9000..!")
 
 	// call baz rpc
-	rpcClient := hello.NewBazServiceProtobufClient("http://baz:9002", &http.Client{})
+	rpcClient := hello.NewBazServiceProtobufClient("http://baz:9000", &http.Client{})
 
 	req := &hello.SayHelloRequest{
 		Msg: "hello",
@@ -30,5 +30,5 @@ func main() {
 	http.HandleFunc("/", barHandler)
 
 	fmt.Println("Listening..")
-	log.Fatal(http.ListenAndServe(":9001", nil))
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }
