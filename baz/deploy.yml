@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - env:
-        image: "markstgodard/linkerd2bug-baz:latest"
+        image: "markstgodard/linkerd2bug-baz:1.0.0"
         imagePullPolicy: Always
         name: baz
         ports:
