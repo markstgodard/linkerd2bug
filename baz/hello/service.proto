@@ -1,0 +1,16 @@
+
+syntax = "proto3";
+
+package baz.hello;
+option go_package = "hello";
+
+message SayHelloRequest {
+  string msg = 1;
+}
+message SayHelloResponse {
+  string msg = 1;
+}
+
+service BazService {
+  rpc Hello(SayHelloRequest) returns (SayHelloResponse);
+}
