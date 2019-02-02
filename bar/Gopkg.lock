@@ -15,11 +15,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:af57e52c040e769023b590979fa602ccf383610eb280c6011b0ab4a368a7f462"
+  digest = "1:6785f0d05e66b79e920751a3f5375e6557db88216333ee8c1e0c14bc4b18f13f"
   name = "github.com/markstgodard/linkerd2bug"
   packages = ["baz/hello"]
   pruneopts = "UT"
-  revision = "8c13999a92f2f1d1521e9cf554d65cc53c5f8b13"
+  revision = "a89f8bf2212fbe28d0fd0ce77cda6aaf7c89be55"
 
 [[projects]]
   digest = "1:1cc64dd62b73781ccbd6b3dd4c893e97b4437e9d0710916d0c3129c3a66cfac7"

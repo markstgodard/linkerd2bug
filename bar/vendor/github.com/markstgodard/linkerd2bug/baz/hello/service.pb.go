@@ -3,11 +3,9 @@
 
 package hello
 
-import (
-	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
-	math "math"
-)
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -18,7 +16,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type SayHelloRequest struct {
 	Msg                  string   `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
@@ -31,17 +29,16 @@ func (m *SayHelloRequest) Reset()         { *m = SayHelloRequest{} }
 func (m *SayHelloRequest) String() string { return proto.CompactTextString(m) }
 func (*SayHelloRequest) ProtoMessage()    {}
 func (*SayHelloRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0892cb0a9427ba50, []int{0}
+	return fileDescriptor_service_a2f82f4c147fb45b, []int{0}
 }
-
 func (m *SayHelloRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SayHelloRequest.Unmarshal(m, b)
 }
 func (m *SayHelloRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SayHelloRequest.Marshal(b, m, deterministic)
 }
-func (m *SayHelloRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SayHelloRequest.Merge(m, src)
+func (dst *SayHelloRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SayHelloRequest.Merge(dst, src)
 }
 func (m *SayHelloRequest) XXX_Size() int {
 	return xxx_messageInfo_SayHelloRequest.Size(m)
@@ -70,17 +67,16 @@ func (m *SayHelloResponse) Reset()         { *m = SayHelloResponse{} }
 func (m *SayHelloResponse) String() string { return proto.CompactTextString(m) }
 func (*SayHelloResponse) ProtoMessage()    {}
 func (*SayHelloResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0892cb0a9427ba50, []int{1}
+	return fileDescriptor_service_a2f82f4c147fb45b, []int{1}
 }
-
 func (m *SayHelloResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SayHelloResponse.Unmarshal(m, b)
 }
 func (m *SayHelloResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_SayHelloResponse.Marshal(b, m, deterministic)
 }
-func (m *SayHelloResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_SayHelloResponse.Merge(m, src)
+func (dst *SayHelloResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SayHelloResponse.Merge(dst, src)
 }
 func (m *SayHelloResponse) XXX_Size() int {
 	return xxx_messageInfo_SayHelloResponse.Size(m)
@@ -103,9 +99,9 @@ func init() {
 	proto.RegisterType((*SayHelloResponse)(nil), "baz.hello.SayHelloResponse")
 }
 
-func init() { proto.RegisterFile("hello/service.proto", fileDescriptor_0892cb0a9427ba50) }
+func init() { proto.RegisterFile("hello/service.proto", fileDescriptor_service_a2f82f4c147fb45b) }
 
-var fileDescriptor_0892cb0a9427ba50 = []byte{
+var fileDescriptor_service_a2f82f4c147fb45b = []byte{
 	// 141 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0xce, 0x48, 0xcd, 0xc9,
 	0xc9, 0xd7, 0x2f, 0x4e, 0x2d, 0x2a, 0xcb, 0x4c, 0x4e, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17,
